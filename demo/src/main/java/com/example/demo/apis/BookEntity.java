@@ -5,21 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+
 @Entity
+@Setter
+@Getter
 @Table(name = "books") // Specifies the name of the database table
 public class BookEntity {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
-    @Getter
     @Column(name = "name") // Specifies the column name in the table
     private String name;
 
-    @Setter
     @Column(name = "description")
     private String description;
 
@@ -36,13 +35,5 @@ public class BookEntity {
     }
 
 
-    // Override toString method to provide a meaningful representation
-    @Override
-    public String toString() {
-        return "BookEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
+
 }
