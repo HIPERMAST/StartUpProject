@@ -1,6 +1,8 @@
 package com.example.demo.apis;
 
+import com.amazonaws.services.sqs.AmazonSQS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,18 @@ public class BookController {
 
     private final BookRepository bookRepository;
 
+    /*
+    private final AmazonSQS amazonSQS;
+    private final String queueUrl;
+    */
+
     @Autowired
-    public BookController(BookRepository bookRepository) {
+    public BookController(BookRepository bookRepository/*, AmazonSQS amazonSQS, @Value("${aws.sqs.queue-url}") String queueUrl*/) {
         this.bookRepository = bookRepository;
+    /*
+        this.amazonSQS = amazonSQS;
+        this.queueUrl = queueUrl;
+    */
     }
 
     @ExceptionHandler({RuntimeException.class})
@@ -46,13 +57,20 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.OK).body("The book with id: " + updatedBook.getId() + " has been updated.");
         } else {
             // Create a new BookEntity object and save it
-            BookEntity book = new BookEntity(name, description);
+            BookEntity book = new BookEntity(name, description, 0.0f);
             BookEntity savedBook = bookRepository.save(book);
+
+            /*
+            // Send a message to the queue to indicate that a new book has been created
+            amazonSQS.sendMessage(queueUrl, "A new book with id: " + savedBook.getId() + " has been created.");
+            */
 
             // Return a response indicating that a new book has been created
             return ResponseEntity.status(HttpStatus.CREATED).body("A new book with id: " + savedBook.getId() + " has been created." );
         }
     }
+
+
 
     @GetMapping("/book/{id}")
     public ResponseEntity<BookEntity> getBook(@PathVariable Long id) {

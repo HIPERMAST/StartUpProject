@@ -15,7 +15,7 @@ class BookRepositoryTest {
     @Test
     void testFindByNameAndDescription() {
         // Save a sample book to the database
-        BookEntity savedBook = bookRepository.save(new BookEntity("Sample Book", "Description"));
+        BookEntity savedBook = bookRepository.save(new BookEntity("Sample Book", "Description", 0.0f));
 
         // Search for the saved book by name and description
         BookEntity foundBook = bookRepository.findByNameAndDescription("Sample Book", "Description");

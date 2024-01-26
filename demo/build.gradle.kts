@@ -27,6 +27,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 	val vOpenAI = "2.3.0"
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$vOpenAI")
+	val vAWS = "1.12.181"
+	implementation("com.amazonaws:aws-java-sdk-sqs:$vAWS")
     compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.projectlombok:lombok")

@@ -22,6 +22,9 @@ public class BookEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "price")
+    private float price;
+
     // Constructors, getters, and setters
 
     // Default constructor
@@ -29,9 +32,10 @@ public class BookEntity {
     }
 
     // Constructor with all fields
-    public BookEntity(String name, String description) {
+    public BookEntity(String name, String description, float price) {
         this.name = name;
         this.description = description;
+        this.price = price;
     }
 
 

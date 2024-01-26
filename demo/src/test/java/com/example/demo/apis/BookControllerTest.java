@@ -36,7 +36,7 @@ class BookControllerTest {
         when(bookRepository.findByNameAndDescription("Sample Book", "Description")).thenReturn(null);
 
         // Create a book entity and set its ID (simulating the database)
-        BookEntity savedBook = new BookEntity("Sample Book", "Description");
+        BookEntity savedBook = new BookEntity("Sample Book", "Description", 0.0f);
         savedBook.setId(1L);
 
         // Mock the bookRepository.save behavior
@@ -58,7 +58,7 @@ class BookControllerTest {
         bookRequest.put("description", "Description");
 
         // Mock the bookRepository behavior
-        BookEntity existingBook = new BookEntity("Sample Book", "Description");
+        BookEntity existingBook = new BookEntity("Sample Book", "Description", 0.0f);
         existingBook.setId(1L);
         when(bookRepository.findByNameAndDescription("Sample Book", "Description")).thenReturn(existingBook);
 
@@ -76,7 +76,7 @@ class BookControllerTest {
     @Test
     void testGetBookById() {
         // Create a sample book entity
-        BookEntity book = new BookEntity("Sample Book", "Description");
+        BookEntity book = new BookEntity("Sample Book", "Description", 0.0f);
         book.setId(1L);
 
         // Mock the bookRepository.findById behavior
@@ -106,8 +106,8 @@ class BookControllerTest {
     void testGetBooks() {
         // Create sample book entities
         List<BookEntity> books = List.of(
-                new BookEntity("Book 1", "Description 1"),
-                new BookEntity("Book 2", "Description 2")
+                new BookEntity("Book 1", "Description 1", 0.0f),
+                new BookEntity("Book 2", "Description 2", 0.0f)
         );
 
         // Mock the bookRepository.findAll behavior
